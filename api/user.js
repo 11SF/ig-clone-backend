@@ -12,7 +12,7 @@ router.post('/login', async (req,res) => {
                 id: user._id,
                 username,
                 email
-            },process.env.TOKEN_KEY,{ expiresIn: "24h"})
+            },"alsjfdlsfm,cx,vpoewjofjl;szdfoq33r0-3qwl;j",{ expiresIn: "24h"})
 
             return res.status(200).json({token})
         }
@@ -44,7 +44,7 @@ router.post('/register', async (req,res) => {
                 id: user._id,
                 username,
                 email
-            },process.env.TOKEN_KEY,{ expiresIn: "24h"})
+            },"alsjfdlsfm,cx,vpoewjofjl;szdfoq33r0-3qwl;j",{ expiresIn: "24h"})
 
             return res.status(201).json({token})
         }
