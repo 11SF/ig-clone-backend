@@ -1,5 +1,5 @@
 {
-  "name": "ig-clone-backend",
+  "name": "ig-clone-backend-express",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -23,6 +23,6 @@
     "prettier": "^2.3.2"
   },
   "engines": { 
-    "node": "15.8.0" 
+    "node": "8.9.4" 
   }
 }
