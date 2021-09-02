@@ -1,5 +1,5 @@
 let router = require('express').Router()
-let bcrypt = require('bcryptJS')
+let bcrypt = require('bcryptjs')
 let User = require('../models/User');
 let jwt = require('jsonwebtoken')
 
