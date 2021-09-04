@@ -69,7 +69,7 @@ router.put("/createComment", auth, async (req, res) => {
   }
 });
 
-router.get('/getPost/:id',  async (req, res) => {
+router.get('/getPost/:id', auth,  async (req, res) => {
     let id = req.params.id;
     
     const post = await Post.findById(id)
