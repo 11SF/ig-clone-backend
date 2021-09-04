@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
   try {
     const decode = jwt.verify(
       token,
-      "alsjfdlsfm,cx,vpoewjofjl;szdfoq33r0-3qwl;j"
+      config.TOKEN_KEY
     );
     req.user = decode;
   } catch (err) {
