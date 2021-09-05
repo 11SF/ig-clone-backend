@@ -17,12 +17,12 @@ router.post("/login", async (req, res) => {
         process.env.TOKEN_KEY,
         {expiresIn: "24h"}
       );
-
-      return res.status(200).json({token});
+      return res.json({status: true, token});
     }
-    res
-      .status(401)
-      .json({msg: "email or password incorrect. please try again."});
+    res.json({
+      status: false,
+      msg: "email or password incorrect. please try again.",
+    });
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -55,11 +55,13 @@ router.post("/register", async (req, res) => {
         {expiresIn: "24h"}
       );
 
-      return res.status(201).json({token});
+      return res
+        .status(201)
+        .json({status: true, msg: "Account created successfully"});
     }
-    res.status(400).send("All input is required");
+    res.json({status: false, msg: "All input is required"});
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).send({status: false, msg: err.message});
   }
 });
 module.exports = router;

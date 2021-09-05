@@ -26,6 +26,26 @@ router.get("/fetchPost", async (req, res) => {
   res.status(200).json(posts);
 });
 
+router.get("/getComment/:id", auth, async (req, res) => {
+  const id = req.params.id;
+  if (!id) {
+    return res
+      .status(400)
+      .json({
+        status: false,
+        msg: "Require id  '/getComment/:id' for query data",
+      });
+  }
+  const post = await Post.find({_id: id},{comments: 1});
+  if (!post) {
+    return res
+      .status(400)
+      .json({status: false, msg: `Post id:${id} is not found`});
+  }
+  // console.log(post[0].comments);
+  res.status(200).json({status: true, comments: post[0].comments});
+});
+
 router.post("/createPost", auth, upload.single("file"), async (req, res) => {
   const {caption} = req.body;
   const owner_id = req.user.id;
@@ -42,8 +62,7 @@ router.post("/createPost", auth, upload.single("file"), async (req, res) => {
     imagePath: req.file.path,
     timestamp: Date.now(),
   });
-
-  res.status(200).json({msg: "Created Post Success"});
+  res.status(200).json({status: true, msg: "Created Post Success", post});
 });
 
 router.put("/createComment", auth, async (req, res) => {
@@ -61,19 +80,21 @@ router.put("/createComment", auth, async (req, res) => {
     if (post) {
       const newComments = [...post.comments, comment];
       const result = await Post.findByIdAndUpdate(id, {comments: newComments});
-      return res.status(200).json({msg: "Add comment successfully"});
+      return res.status(200).json({status: true, msg: "Add comment successfully"});
     }
-    res.status(500).json({msg: "error"});
+    res.status(500).json({status: false, msg: "error"});
   } catch (err) {
-    res.status(500).json({msg: err.message});
+    res.status(500).json({status: false, msg: err.message});
   }
 });
 
-router.get('/getPost/:id', auth,  async (req, res) => {
-    let id = req.params.id;
-    
-    const post = await Post.findById(id)
+router.get("/getPost/:id", auth, async (req, res) => {
+  let id = req.params.id;
 
-    res.status(200).json(post)
-})
+  const post = await Post.findById(id);
+  if (post) {
+  }
+  res.status(200).json(post);
+});
+
 module.exports = router;
