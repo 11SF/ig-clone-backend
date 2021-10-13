@@ -26,7 +26,7 @@ router.get("/fetchPost", async (req, res) => {
   res.status(200).json(posts);
 });
 
-router.get("/getComment/:id", auth, async (req, res) => {
+router.get("/getComment/:id", async (req, res) => {
   const id = req.params.id;
   if (!id) {
     return res
